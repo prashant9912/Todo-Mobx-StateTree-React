@@ -100,6 +100,14 @@ const TodoView = observer((props) => {
         Add
       </Add>
 
+      <Add
+        onClick={() =>
+          props.store.getData()
+        }
+      >
+        Fetch
+      </Add>
+
       {values(props.store.todos).map((v, k) => (
         <Todo key={k} todo={v} store={props.store} />
       ))}

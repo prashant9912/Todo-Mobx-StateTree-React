@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import styled, { css } from "styled-components";
 import {store} from './MobxStateTree'
 import { observer } from "mobx-react";
-
+import {values} from 'mobx'
 
 const Bar = styled.div`
 width:120%;
