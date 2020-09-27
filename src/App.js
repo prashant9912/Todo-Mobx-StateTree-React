@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { observer } from "mobx-react";
 import { values } from "mobx";
 import Nav from './Nav'
+import Footer from './Footer'
 
 const Cointainer = styled.div`
   padding: 10px;
@@ -101,11 +102,13 @@ const TodoView = observer((props) => {
       </Add>
 
       <Add
-        onClick={() =>
+        onClick={() =>{
+          console.log('button click')
           props.store.getData()
         }
+        }
       >
-        Fetch
+        Async Fetch api
       </Add>
 
       {values(props.store.todos).map((v, k) => (
@@ -126,6 +129,7 @@ export default class App extends Component {
         <h2>Mobx Todo</h2>
         <TodoCounterView store={this.props.store} />
         <TodoView store={this.props.store} />
+        <Footer/>
       </Cointainer>
     );
   }

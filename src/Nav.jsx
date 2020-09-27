@@ -20,7 +20,7 @@ color:white;
 
  class Nab extends Component {
     render() {
-        console.log('Nav render')
+        console.log('Nav Render')
         return (
             <Bar>
                  {store.pendingCount} pending, {store.completedCount} completed
