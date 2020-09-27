@@ -4,10 +4,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import {store} from './MobxStateTree'
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <>
+  {/* <React.StrictMode> */}
+    <App store={store}/>
+  {/* </React.StrictMode> */}
+  </>
+  ,
   document.getElementById('root')
 );
 
