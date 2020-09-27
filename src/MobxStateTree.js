@@ -1,5 +1,6 @@
 import React from 'react'
 import {types} from 'mobx-state-tree'
+import {values} from 'mobx'
 
 
 const Todo = types
@@ -24,14 +25,21 @@ const RootStore = types
 .model({
     todos:types.map(Todo)
 })
-.actions(self=>{
-    function addTodo(id,name){
+  .views(self => ({
+        get pendingCount() {
+            return values(self.todos).filter(todo => !todo.done).length
+        },
+        get completedCount() {
+            return values(self.todos).filter(todo => todo.done).length
+        }
+    }))
+.actions(self=>({
+     addTodo(id,name){
         self.todos.set(id,Todo.create({id,name}));
     }
 
-    return {addTodo}
-
-})
+}
+))
 
 
 export const store = RootStore.create({
