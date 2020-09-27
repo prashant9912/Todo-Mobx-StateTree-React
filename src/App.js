@@ -3,6 +3,7 @@ import React, { Component, PureComponent } from "react";
 import styled, { css } from "styled-components";
 import { observer } from "mobx-react";
 import { values } from "mobx";
+import Nav from './Nav'
 
 const Cointainer = styled.div`
   padding: 10px;
@@ -49,7 +50,7 @@ const TodoCounterView = observer((props) => {
   console.log("Counter Updated");
   return (
     <div>
-      {props.store.pendingCount} pending, {props.store.completedCount} completed
+      {/* {props.store.pendingCount} pending, {props.store.completedCount} completed */}
     </div>
   );
 });
@@ -83,6 +84,7 @@ const Todo = observer((props) => {
   );
 });
 
+
 const TodoView = observer((props) => {
   console.log("View Updated");
   return (
@@ -105,11 +107,14 @@ const TodoView = observer((props) => {
   );
 });
 
+
+
 export default class App extends Component {
   render() {
     console.log("Main Comp Render");
     return (
       <Cointainer>
+        <Nav/>
         <h2>Mobx Todo</h2>
         <TodoCounterView store={this.props.store} />
         <TodoView store={this.props.store} />

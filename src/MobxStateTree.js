@@ -36,6 +36,10 @@ const RootStore = types
 .actions(self=>({
      addTodo(id,name){
         self.todos.set(id,Todo.create({id,name}));
+    },
+
+    loadData(){
+
     }
 
 }
