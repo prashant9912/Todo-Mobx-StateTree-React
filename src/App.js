@@ -30,8 +30,8 @@ const Add = styled.button`
     `}
 `;
 const TodoBox = styled.div`
-    display:flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
   padding: 10px;
   border: 2px solid #2cb6d3;
   border-radius: 10px;
@@ -40,23 +40,22 @@ const TodoBox = styled.div`
 `;
 
 const Check = styled.input`
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+`;
 
-height: 25px;
-width: 25px;
-background-color: #eee;
-`
-
-
-const TodoCounterView = observer(props => {
-  console.log('Counter Updated')
-  return <div>
+const TodoCounterView = observer((props) => {
+  console.log("Counter Updated");
+  return (
+    <div>
       {props.store.pendingCount} pending, {props.store.completedCount} completed
-  </div>
-})
-
+    </div>
+  );
+});
 
 const Todo = observer((props) => {
-  console.log("TODO id:"+props.todo.id+" updated");
+  console.log("TODO id:" + props.todo.id + " updated");
 
   return (
     <TodoBox>
@@ -65,11 +64,21 @@ const Todo = observer((props) => {
         checked={props.todo.done}
         onChange={(e) => props.todo.toggle()}
       />
-      <input style={{border:"none",fontSize:18}}
-      type="text"
-      value={props.todo.name}
-      onChange={e => props.todo.setName(e.target.value)}
-    />
+      <input
+      autoFocus
+        style={{ border: "none", fontSize: 18 }}
+        type="text"
+        value={props.todo.name}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            props.store.addTodo(
+            Math.floor(Math.random() * 1000).toString(36),
+            ""
+          )
+          }
+        }}
+        onChange={(e) => props.todo.setName(e.target.value)}
+      />
     </TodoBox>
   );
 });
@@ -80,18 +89,17 @@ const TodoView = observer((props) => {
     <div>
       <Add
         onClick={() =>
-          props.todo.addTodo(
+          props.store.addTodo(
             Math.floor(Math.random() * 1000).toString(36),
-            "new Task"
+            ""
           )
         }
       >
-        {" "}
         Add
       </Add>
 
-      {values(props.todo.todos).map((v, k) => (
-        <Todo key={k} todo={v} />
+      {values(props.store.todos).map((v, k) => (
+        <Todo key={k} todo={v} store={props.store} />
       ))}
     </div>
   );
@@ -103,8 +111,8 @@ export default class App extends Component {
     return (
       <Cointainer>
         <h2>Mobx Todo</h2>
-        <TodoCounterView store={this.props.store}/>
-        <TodoView todo={this.props.store} />
+        <TodoCounterView store={this.props.store} />
+        <TodoView store={this.props.store} />
       </Cointainer>
     );
   }
