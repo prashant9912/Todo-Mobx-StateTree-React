@@ -11,6 +11,7 @@ import {store} from './MobxStateTree'
 
 ReactDOM.render(
   <>
+  
   {/* <React.StrictMode> */}
     <App store={store}/>
   {/* </React.StrictMode> */}

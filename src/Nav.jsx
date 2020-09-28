@@ -19,6 +19,7 @@ color:white;
 
 
  class Nab extends Component {
+
     render() {
         console.log('Nav Render')
         return (

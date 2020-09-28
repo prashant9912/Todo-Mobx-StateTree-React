@@ -1,8 +1,10 @@
 import React from "react";
 import { types, onPatch, cast } from "mobx-state-tree";
 import { runInAction, values } from "mobx";
-
 import axios from "axios";
+
+import * as localForage from  "localforage";
+import { persist } from 'mst-persist'
 
 const Todo = types
 
@@ -82,6 +84,17 @@ const RootStore = types
   }));
 
 export const store = RootStore.create({});
+
+
+//Presist here
+
+persist('some', store, {
+  storage: localForage,  // or AsyncStorage in react-native.
+                         // default: localStorage
+  jsonify: false , // if you use AsyncStorage, this shoud be true
+
+}).then(() => console.log('someStore has been hydrated'))
+
 
 onPatch(store, (patch) => {
   console.log(patch);
