@@ -39,6 +39,8 @@ const TodoBox = styled.div`
   border-radius: 10px;
   width: 300px;
   margin-bottom: 10px;
+  justify-content: space-around;
+
 `;
 
 const Check = styled.input`
@@ -81,6 +83,7 @@ const Todo = observer((props) => {
         }}
         onChange={(e) => props.todo.setName(e.target.value)}
       />
+      <button onClick={()=>{props.todo.del(props.todo.id)}}>—</button>
     </TodoBox>
   );
 });

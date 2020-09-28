@@ -1,5 +1,5 @@
 import React from "react";
-import { types, onPatch, cast } from "mobx-state-tree";
+import { types, onPatch, cast,getParent } from "mobx-state-tree";
 import { runInAction, values } from "mobx";
 import axios from "axios";
 
@@ -20,7 +20,10 @@ const Todo = types
     function toggle() {
       self.done = !self.done;
     }
-    return { setName, toggle };
+    function del(id){
+      getParent(self,2).remove(self)
+    }
+    return { setName, toggle,del };
   });
 
 const Api = types
@@ -81,6 +84,9 @@ const RootStore = types
     addData(data) {
       self.data = data;
     },
+    remove(item){
+      console.log(self.todos.delete(item.id))
+    }
   }));
 
 export const store = RootStore.create({});
