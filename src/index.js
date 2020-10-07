@@ -1,21 +1,22 @@
-import React from 'react';
+import React,{createContext,} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {store} from './MobxStateTree'
+import {store} from './store/MobxStateTree'
 
-
+//context
+const Theme = createContext('light')
 
 
 ReactDOM.render(
-  <>
+  <Theme.Provider value={'dark'}>
   
   {/* <React.StrictMode> */}
     <App store={store}/>
   {/* </React.StrictMode> */}
-  </>
+  </Theme.Provider>
   ,
   document.getElementById('root')
 );

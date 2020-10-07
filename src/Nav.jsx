@@ -1,9 +1,13 @@
 
-import React, { Component } from 'react'
+import React, { Component,useContext } from 'react'
 import styled, { css } from "styled-components";
-import {store} from './MobxStateTree'
+
+//MobX
+import {store} from './store/MobxStateTree'
 import { observer } from "mobx-react";
 import {values} from 'mobx'
+
+
 
 const Bar = styled.div`
 width:120%;
@@ -21,10 +25,12 @@ color:white;
  class Nab extends Component {
 
     render() {
+        const theme = this.context
+        console.log(theme)
         console.log('Nav Render')
         return (
             <Bar>
-                 {store.pendingCount} pending, {store.completedCount} completed
+              {store.pendingCount} pending, {store.completedCount} completed
             </Bar>
         )
     }
